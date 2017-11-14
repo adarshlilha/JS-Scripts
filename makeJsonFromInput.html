@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Make JSON from Form Data</title>
+</head>
+<body>
+	<section>
+		<label for="name" required>Name</label>
+		<input type="text" name="name"/>
+		<label for="age" required>Age</label>
+		<input type="number" name="age">
+		<label for="email" required>Email</label>
+		<input type="email" name="email">
+		<label for="gender" required>Gender</label>
+		<input type="radio" name="gender" value="M">Male
+		<input type="radio" name="gender" value="F">Female
+		<input type="button" name="Submit" value="Submit" onclick="makeJSON()">
+	</section>
+
+
+	<script type="text/javascript">
+		function makeJSON() {
+			var name=document.querySelectorAll("label");
+			var formObj ={};
+			for(var j=0;j<name.length;j++)
+			{
+				var nameVal=name[j].getAttribute('for');
+				
+				var inputTags = document.querySelectorAll("input");
+				var inputTagValue;
+				var inputValue;
+				
+
+				// console.log(inputTags);
+				// console.log(inputTags.length);
+
+				for(var i=0;i<inputTags.length;i++)
+				{
+					inputTagValue = inputTags[i].getAttribute('name');
+					//console.log(inputTags[i]);
+					if(inputTagValue === nameVal)
+					{
+						inputValue=inputTags[i].value;
+
+						formObj[nameVal] = inputValue;
+
+						// console.log(formObj);
+					}
+				}
+
+				var inputTagsRadio = document.querySelectorAll("input[type=radio]:checked");
+				var inputTagValue2;
+				var inputValue2;
+
+				for(var a=0;a<inputTagsRadio.length;a++)
+				{
+					inputTagValue2 = inputTagsRadio[a].getAttribute('name');
+					if(inputTagValue2 === nameVal)
+					{
+						inputValue2=inputTagsRadio[a].value;
+
+						formObj[nameVal] = inputValue2;
+
+						
+					}
+				}
+
+			}
+			console.log(formObj);
+
+
+		}
+
+	</script>
+</body>
+</html>
